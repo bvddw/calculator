@@ -53,20 +53,25 @@
     <script>
       let currentNumber = '';
       let nextStep = false;
+      let isPreviousSign = false;
 
       function addDigit(digit) {
         if (nextStep) {
           currentNumber = '';
           nextStep = false;
         }
+        isPreviousSign = false;
         currentNumber += digit;
         document.querySelector('.current-action').innerHTML = currentNumber;
         document.querySelector('.result').innerHTML = '';
       }
 
       function addSign(currSign) {
+        if (isPreviousSign)
+          currentNumber = currentNumber.slice(0, currentNumber.length - 2);
         if (nextStep)
           nextStep = false;
+        isPreviousSign = true;
         currentNumber += ` ${currSign} `;
         document.querySelector('.current-action').innerHTML = currentNumber;
       }
