@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="mainDiv">
+      <div class="resultAndOperationStrings">
+        <p class="current-action"></p>
+      
+        <p class="result"></p>
+      </div>
+      
+      <div class="numbersAndOperations">
+        <div class="rowWithNumbers">
+          <button class="digit" onclick="addDigit(7);">7</button>
+          <button class="digit" onclick="addDigit(8);">8</button>
+          <button class="digit" onclick="addDigit(9);">9</button>
+          <button class="operation" onclick="addSign('+')">+</button>
+        </div>
+
+        <div class="rowWithNumbers">
+          <button class="digit" onclick="addDigit(4);">4</button>
+          <button class="digit" onclick="addDigit(5);">5</button>
+          <button class="digit" onclick="addDigit(6);">6</button>
+          <button class="operation" onclick="addSign('-')">-</button>
+        </div>
+
+        <div class="rowWithNumbers">
+          <button class="digit" onclick="addDigit(1);">1</button>
+          <button class="digit" onclick="addDigit(2);">2</button>
+          <button class="digit" onclick="addDigit(3);">3</button>
+          <button class="operation" onclick="addSign('*')">*</button>
+        </div>
+        
+        <div class="rowWithNumbers">
+          <button class="digit" onclick="addDigit(0);">0</button>
+          <button class="digitZero" onclick="addDigit('.');">.</button>
+          <button class="equal" onclick="currentNumber = addEqual()">=</button>
+          <button class="operation" onclick="addSign('/')">/</button>
+        </div>
+        <div class="rowWithNumbers">
+          <button class="clearButton" onclick="clearStrings()">clear</button>
+        </div>
+        
+      </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      let currentNumber = '';
+      let nextStep = false;
+
+      function addDigit(digit) {
+        if (nextStep) {
+          currentNumber = '';
+          nextStep = false;
+        }
+        currentNumber += digit;
+        document.querySelector('.current-action').innerHTML = currentNumber;
+        document.querySelector('.result').innerHTML = '';
+      }
+
+      function addSign(currSign) {
+        if (nextStep)
+          nextStep = false;
+        currentNumber += ` ${currSign} `;
+        document.querySelector('.current-action').innerHTML = currentNumber;
+      }
+
+      function addEqual() {
+        let result = eval(currentNumber);
+        currentNumber = '' + result;
+        nextStep = true;
+        document.querySelector('.result').innerHTML = result;
+        return currentNumber;
+      }
+
+      function clearStrings() {
+        currentNumber = '';
+        result = '';
+        document.querySelector('.current-action').innerHTML = '';
+        document.querySelector('.result').innerHTML = '';
+      }
+    </script>
+  </body>
+</html>
